@@ -37,10 +37,11 @@
     </div>
 
     <script>
+        // Search Button 
         document.getElementById('search').addEventListener('click', function(){
             workingFunction();
         })
-        
+        // Working Function 
         function workingFunction(){
             const cityName = document.getElementById('cityName').value;
             const APIkey  = `0b947cbe26d9fc4e960fa6e0d2ec7847`;
@@ -61,6 +62,24 @@
 
                 })
         }
+        // Default 
+            const cityName = "Zurich";
+            const APIkey  = `0b947cbe26d9fc4e960fa6e0d2ec7847`;
+            const url  = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIkey}`; 
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+
+                    const defaultCity = data.name;
+                    const defaultTempKalvin = data.main.temp;
+                    const defaultTempCelsius = defaultTempKalvin - 273.16;
+                    const defaultWeatherCondition = data.weather[0].main;
+
+                    document.getElementById('displayCity').innerText = defaultCity;
+                    document.getElementById('displayTemperature').innerText = defaultTempCelsius.toFixed(2);
+                    document.getElementById('displayWeatherCondition').innerText = defaultWeatherCondition;
+                })
 
     </script>
 
